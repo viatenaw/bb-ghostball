@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { rootPath } from '../../../logic/paths'
+import { withHeader } from '../../../shared/hocs/withHeader'
 import { Home } from '../../home/Home'
 
 const notFoundRoute: RouteDefinition = {
@@ -17,9 +18,9 @@ export const routes: RouteDefinition[] = [
     title: 'Home',
     pathType: 0,
   },
-  notFoundRoute
+  notFoundRoute,
 ]
-  .map((r) => ({ ...r, element: r.element }))
+  .map((r) => ({ ...r, element: withHeader(r.element, r.path) }))
   .concat()
 
 export interface RouteDefinition {
@@ -54,9 +55,5 @@ export const RoutesComponent = () => {
     return <Route key={i} path={route.path} {...render} />
   }
 
-  return (
-    <Routes>
-      {routes.map(mapRoutes)}
-    </Routes>
-  )
+  return <Routes>{routes.map(mapRoutes)}</Routes>
 }

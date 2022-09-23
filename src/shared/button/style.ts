@@ -1,23 +1,22 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components'
 
-import { screenSizes } from "../../styles/theme"
+import { screenSizes } from '../../styles/theme'
 
 const animateLoader = keyframes`
   from {transform : rotate(0deg)}
   to {transform : rotate(360deg)}
 `
 
-
-// here in the svg you can add the svg according and can animate 
+// here in the svg you can add the svg according and can animate
 const svgCSS = css`
-    font-size : 26px;
-    animation : ${animateLoader} linear 2s infinite;
+  font-size: 26px;
+  animation: ${animateLoader} linear 2s infinite;
 `
 const buttonStyles = css`
   outline: none;
   border-radius: 2px;
   color: rgb(0 0 0 / 90%);
-  border: 1px solid rgb(0 0 0 / 90%);
+  border: 2px solid rgb(0 0 0 / 90%);
   font-size: 1em;
   cursor: pointer;
   font-family: Roboto;
@@ -29,7 +28,7 @@ const buttonStyles = css`
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
   }
   svg {
-      ${svgCSS}
+    ${svgCSS}
   }
   @media (max-width: ${screenSizes.M}px) {
     font-size: 16px;
@@ -41,7 +40,7 @@ const buttonStyles = css`
     position: absolute;
     background: ${(props: any) => props.theme.primary};
     display: block;
-    content: "";
+    content: '';
     border-radius: 9999px;
     opacity: 1;
     animation: 0.5s ease 1 forwards ripple-effect;
@@ -73,7 +72,7 @@ const buttonStyles = css`
   }
   position: relative;
   overflow: hidden;
-`;
+`
 
 const error = css`
   background: red;
@@ -84,7 +83,7 @@ const error = css`
   :focus {
     box-shadow: 0px 0px 5px red;
   }
-`;
+`
 const success = css`
   background: green;
   color: white;
@@ -94,7 +93,7 @@ const success = css`
   :focus {
     box-shadow: 0px 0px 5px green;
   }
-`;
+`
 const warning = css`
   background: ${(props: any) => props.theme.error};
   color: black;
@@ -106,17 +105,17 @@ const warning = css`
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.error};
   }
 
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.disabledText};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
 
   min-width: 5em;
   min-height: 3em;
   color: ${(props: any) => props.theme.white};
-`;
+`
 
 const walletButton = css`
   background: ${(props: any) => props.theme.secondary};
@@ -129,10 +128,10 @@ const walletButton = css`
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
   }
 
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.disabledText};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
 
@@ -143,7 +142,7 @@ const walletButton = css`
   @media (max-width: ${screenSizes.M}px) {
     max-width: 200px;
   }
-`;
+`
 const filledButton = css`
   background: ${(props: any) => props.theme.black};
   border-radius: 10px;
@@ -163,14 +162,13 @@ const filledButton = css`
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.black};
   }
 
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.disabledText};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
- 
-`;
+`
 
 const borderedfilledButton = css`
   background: ${(props: any) => props.theme.secondary};
@@ -183,18 +181,18 @@ const borderedfilledButton = css`
   :hover,
   :focus {
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
-  };
+  }
 
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.disabledText};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
   @media (max-width: ${screenSizes.M}px) {
     font-size: 16px;
   }
-`;
+`
 const borderedfilledLightButton = css`
   background: ${(props: any) => props.theme.secondaryButton};
   border-radius: 10px;
@@ -206,18 +204,18 @@ const borderedfilledLightButton = css`
   :hover,
   :focus {
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
-  };
+  }
 
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.halfWhite};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
   @media (max-width: ${screenSizes.M}px) {
     font-size: 16px;
   }
-`;
+`
 const dimBorderedfilledButton = css`
   background: ${(props: any) => props.theme.secondary};
   border-radius: 10px;
@@ -229,18 +227,18 @@ const dimBorderedfilledButton = css`
   :hover,
   :focus {
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
-  };
+  }
   min-width: 60px;
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.disabledText};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
   @media (max-width: ${screenSizes.M}px) {
     font-size: 16px;
   }
-`;
+`
 const roundedfilledButton = css`
   min-width: 65px;
   min-height: 32px;
@@ -254,22 +252,22 @@ const roundedfilledButton = css`
   :hover,
   :focus {
     box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
-  };
+  }
 
-  :disabled{
+  :disabled {
     color: ${(props: any) => props.theme.disabledText};
-    pointer-events : none;
-    cursor : not-allowed;
+    pointer-events: none;
+    cursor: not-allowed;
     background: ${(props: any) => props.theme.disabled};
   }
   @media (max-width: ${screenSizes.M}px) {
     font-size: 16px;
   }
-`;
+`
 
 const disabled = css`
-  pointer-events : none;
-  cursor : not-allowed;
+  pointer-events: none;
+  cursor: not-allowed;
   opacity: 0.4;
 `
 
@@ -283,26 +281,33 @@ const buttonWrapperStyles: any = {
   roundedfilledButton,
   filledButton,
   dimBorderedfilledButton,
-  borderedfilledLightButton
+  borderedfilledLightButton,
 }
 
 interface IButtonWrapper {
-  btnType?: "error" | "success" | 'disabled' | 'warning' | 'walletButton' | 'borderedfilledButton| roundedfilledButton | filledButton | dimBorderedfilledButton | borderedfilledLightButton',
-  customColor?: string,
-  customBgColor?: string,
-  customWidth?: string,
-  customHeight?: string,
-  bRadius?: string,
-  fSize?: string,
-  customPadding?: string,
+  btnType?:
+    | 'error'
+    | 'success'
+    | 'disabled'
+    | 'warning'
+    | 'walletButton'
+    | 'borderedfilledButton| roundedfilledButton | filledButton | dimBorderedfilledButton | borderedfilledLightButton'
+  customColor?: string
+  customBgColor?: string
+  customWidth?: string
+  customHeight?: string
+  bRadius?: string
+  fSize?: string
+  customPadding?: string
   fSizeMobile?: string
-  fontLS?: string,
+  fontLS?: string
   rippleColor?: string
   minWidthMb?: string
   maxHeightMb?: string
   minWidthSMb?: string
   minWidthSpan?: string
-  
+  shadowColor?: string
+  customBorder?: string
 }
 
 export const ButtonWrapper = styled.button<IButtonWrapper>`
@@ -317,13 +322,13 @@ export const ButtonWrapper = styled.button<IButtonWrapper>`
   font-size: ${(props: any) => props.fSize};
   letter-spacing: ${(props: any) => props.fontLS};
   padding: ${(props: any) => props.customPadding};
-  :disabled{
+  :disabled {
     opacity: 0.5;
-  };
+  }
   @media (max-width: ${screenSizes.M}px) {
-    font-size: ${(props: any) => props.fSizeMobile || "14px"};
+    font-size: ${(props: any) => props.fSizeMobile || '14px'};
     min-width: ${(props: any) => props.minWidthMb};
-    .content{
+    .content {
       max-height: ${(props: any) => props.maxHeightMb};
       min-width: ${(props: any) => props.minWidthMb};
       max-width: ${(props: any) => props.minWidthMb};
@@ -336,8 +341,8 @@ export const ButtonWrapper = styled.button<IButtonWrapper>`
   @media (max-width: ${screenSizes.XS}px) {
     min-width: ${(props: any) => props.minWidthSMb};
     max-width: ${(props: any) => props.minWidthSMb};
-    .content{
-      max-width: ${(props: any) => props.minWidthSMb ? '-webkit-fill-available' : ''};
+    .content {
+      max-width: ${(props: any) => (props.minWidthSMb ? '-webkit-fill-available' : '')};
       min-width: ${(props: any) => props.minWidthSpan};
       text-overflow: ellipsis;
       display: inline-block;
@@ -345,21 +350,22 @@ export const ButtonWrapper = styled.button<IButtonWrapper>`
       white-space: nowrap;
     }
   }
-  cursor: ${(props: any) => props.disabled ? 'not-allowed' : props.tile ? 'auto' : 'pointer'};
+  cursor: ${(props: any) => (props.disabled ? 'not-allowed' : props.tile ? 'auto' : 'pointer')};
   .ripple {
     background: ${(props: any) => props.rippleColor};
   }
-
+  :hover,
+  :focus {
+    box-shadow: 0px 0px 5px ${(props: any) => props.shadowColor};
+  }
+  border: ${(props: any) => props.customBorder};
 `
 export const ButtonAlignment = styled.div<any>`
   display: flex;
   align-items: ${(props: any) =>
-    (props.align == "center" && "center") ||
-    (props.align == "start" && "flex-start") ||
-    (props.align == "end" && "flex-end")};
-  justify-content: ${(props: any) =>
-    (props.justify) ||
-    "center"
-  };
-  width: ${(props: any) => props.wrapperWidth}
-`;
+    (props.align == 'center' && 'center') ||
+    (props.align == 'start' && 'flex-start') ||
+    (props.align == 'end' && 'flex-end')};
+  justify-content: ${(props: any) => props.justify || 'center'};
+  width: ${(props: any) => props.wrapperWidth};
+`

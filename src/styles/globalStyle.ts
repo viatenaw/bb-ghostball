@@ -54,12 +54,12 @@ export const GlobalStyle = createGlobalStyle`
   }
   *::-webkit-scrollbar {
     width: 12px;
-    background-color: ${rgba(81, 111, 119, 0.101961)};
+    background-color: ${(props: ThemeProps<Theme>) => props.theme.black};
     border-radius: 4px;
   }
   *::-webkit-scrollbar-thumb {
     border: 2px solid transparent;
-    background-color: #9CA6AD;
+    background-color:${(props: ThemeProps<Theme>) => props.theme.primary};;
     border-radius: 20px;
     background-clip: content-box;
   }
@@ -74,7 +74,7 @@ export const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: inherit;
   }
-  a{
+  a {
     text-decoration: none;
     color: ${(props: ThemeProps<Theme>) => props.theme.white};
   }
