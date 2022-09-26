@@ -65,14 +65,20 @@ export const Navigations = styled.nav`
     color: ${(props: any) => props.theme.white};
     padding: 15px 20px;
     margin: 0 10px;
+    transition: border-color .3s ease;
+    transition: border-width .3s ease;
+
+    border-bottom: 0px solid;
     &:hover {
-      border-bottom: 1px solid ${(props: any) => props.theme.primary};
-      color: ${(props: any) => props.theme.primary} !important;
+        border-width: 1px;
+        border-color: ${(props: any) => props.theme.primary};
+        color: ${(props: any) => props.theme.primary} !important;
+        transition: color 1.5s ease;
     }
   }
   .hamburger {
     display: none;
-    background: ${(props: any) => props.theme.secondary};
+    background: #000 url(${starBG});
     border: 0;
   }
   @media screen and (max-width: 811px) {
@@ -86,7 +92,7 @@ export const Navigations = styled.nav`
       display: flex;
       height: 100vh;
       width: 100vw;
-      background: ${(props: any) => props.theme.secondary};
+      background: #000 url(${starBG});
       flex-direction: column;
       position: absolute;
       top: 100%;
@@ -95,4 +101,5 @@ export const Navigations = styled.nav`
       align-items: center;
     }
   }
+}
 `

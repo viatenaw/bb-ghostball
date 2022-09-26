@@ -9,7 +9,7 @@ export const ContainerAbout = styled.div`
   padding: 75px 0 200px 0;
   background: #000 url(${starBG});
 `
-export const ContainerRoadMap = styled.div`
+export const ContainerRoadMap = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,14 +26,31 @@ export const ContainerGuide = styled.div`
   flex-direction: column;
   background: ${(props: ThemeProps<any>) => props.theme.primary};
 `
-export const ContainerTeam = styled.div`
+export const ContainerTeam = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 75px 0 200px 0;
+  padding: 75px 0 0px 0;
   flex-direction: column;
   background: ${(props: ThemeProps<any>) => props.theme.primary};
   gap: 80px;
+`
+export const ContainerFAQ = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 75px 0 0px 0;
+  flex-direction: column;
+  background: ${(props: ThemeProps<any>) => props.theme.primary};
+  gap: 20px;
+`
+export const ContainerTail = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 15px;
+  background: #000 url(${starBG});
+  align-items: center;
 `
 export const TeamCardsContainer = styled.div`
   display: grid;
@@ -41,8 +58,29 @@ export const TeamCardsContainer = styled.div`
   grid-gap: 1rem;
   width: 100%;
   max-width: 1400px;
+  @media (max-width: ${screenSizes.M}px) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-column-gap: 0;
+  }
 `
-
+export const FAQItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0;
+  @media (max-width: ${screenSizes.M}px) {
+    p {
+      max-width: 80%;
+    }
+  }
+`
+export const FAQContainer = styled.ul`
+  padding-right: 18px;
+  width: 100%;
+  max-width: 1200px;
+  li:not(:last-child) {
+    border-bottom: 1px solid ${(props: ThemeProps<any>) => props.theme.blackSuperFaded};
+  }
+`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 60px;
@@ -60,6 +98,9 @@ export const RoadMapHead = styled.div`
   align-items: center;
   flex-direction: column;
   max-width: 550px;
+  @media (max-width: ${screenSizes.M}px) {
+    text-align: center;
+  }
 `
 
 export const AvatarContainer = styled.div`
@@ -70,6 +111,19 @@ export const AvatarContainer = styled.div`
   flex-direction: column;
   max-width: 560px;
 `
+export const AboutBody = styled.div`
+  display: flex;
+  gap: 15px;
+`
+interface IAboutProps {
+  zIndex?: string
+  bg?: boolean
+}
+export const AboutLeft = styled.div<IAboutProps>`
+  display: flex;
+  z-index: ${(props: any) => props.zIndex};
+  background: ${(props: any) => (props.bg ? props.theme.primary : '')};
+`
 export const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,10 +131,35 @@ export const DetailsContainer = styled.div`
   justify-content: center;
   align-items: start;
   max-width: 550px;
+  position: relative;
   @media (max-width: ${screenSizes.M}px) {
-    p {
-      text-align: center;
-    }
+    align-items: center;
+    max-width: 350px;
+  }
+`
+export const ProgressContainer = styled.div`
+  background: ${(props: any) => props.theme.blackFaded};
+  height: 100%;
+  width: 3px;
+  position: absolute;
+  left: 25px;
+`
+interface IProgressBarProps {
+  height?: Number
+}
+export const ProgressBar = styled.div<IProgressBarProps>`
+  height: ${(props: any) => props.height + '%' || '0%'};
+  width: 3px;
+  background: black;
+`
+export const DetailsContainerAbout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: center;
+  align-items: start;
+  max-width: 550px;
+  @media (max-width: ${screenSizes.M}px) {
     align-items: center;
     max-width: 350px;
   }
@@ -131,6 +210,10 @@ export const CardsContainer = styled.div`
   margin-top: ${(props: ICardProps) => props.marginTop || '2em'};
   display: flex;
   gap: 140px;
+  @media (max-width: ${screenSizes.M}px) {
+    flex-direction: column;
+    gap: 48px;
+  }
 `
 export const CardWrapper = styled.div`
   display: flex;
@@ -158,6 +241,9 @@ export const LineRight = styled.div`
   top: 50%;
   left: 50%;
   transform: translateX(66.5px);
+  @media (max-width: ${screenSizes.M}px) {
+    width: calc(50vw - 66.5px);
+  }
 `
 export const LineLeft = styled.div`
   height: 1px;
@@ -185,9 +271,15 @@ export const CardTextWrapper = styled.div`
   align-items: center;
   padding: 30px;
   gap: 16px;
+  justify-content: space-between;
+  height: 100%;
 `
 
 export const BlankItem = styled.div`
   height: 185px;
   width: 185px;
+  @media (max-width: ${screenSizes.M}px) {
+    height: 165px;
+    width: 150px;
+  }
 `

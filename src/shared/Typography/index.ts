@@ -14,6 +14,7 @@ interface ITextProps {
   fSizeM?: string
   fLineHeightMb?: string
   width?: string
+  fontSizeM?: string
 }
 
 export const Heading3 = styled.p`
@@ -24,12 +25,12 @@ export const Heading3 = styled.p`
   font-weight: 600;
   font-family: 'Inter', sans-serif;
 `
-export const MarkingText = styled.p`
+export const MarkingText = styled.p<ITextProps>`
   color: ${(props: any) => props.theme.black};
-  font-size: 24px;
+  font-size: ${(props: any) => props.fSize || '24px'};
   font-style: italic;
   line-height: 29px;
-  font-weight: 600;
+  font-weight: ${(props: any) => props.fWeight || '600'};
   font-family: 'Inter', sans-serif;
 `
 
@@ -59,6 +60,9 @@ export const CardHeadText = styled.p<ITextProps>`
   font-size: ${(props: any) => props.fSize || '36px'};
   line-height: 44px;
   text-align: ${(props: any) => props.tAlign};
+  @media (max-width: ${screenSizes.M}px) {
+    font-size: ${(props: any) => props.fontSizeM};
+  }
 `
 export const CardBodyText = styled.p<ITextProps>`
   color: ${(props: any) => props.fColor || props.theme.white};
@@ -68,6 +72,9 @@ export const CardBodyText = styled.p<ITextProps>`
   font-size: ${(props: any) => props.fSize || '16px'};
   line-height: 24px;
   text-align: ${(props: any) => props.tAlign};
+  @media (max-width: ${screenSizes.M}px) {
+    font-size: ${(props: any) => props.fontSizeM};
+  }
 `
 export const SmallText = styled.p<ITextProps>`
   color: ${(props: any) => props.fColor};
@@ -76,4 +83,7 @@ export const SmallText = styled.p<ITextProps>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  @media (max-width: ${screenSizes.M}px) {
+    font-size: ${(props: any) => props.fontSizeM || '14px'};
+  }
 `

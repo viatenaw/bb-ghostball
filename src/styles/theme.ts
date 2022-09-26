@@ -81,7 +81,7 @@ export interface Colors {
   darkBlue1: string
   halfWhite: string
   pink4: string
-
+  blackSuperFaded: string
   brightGreen: string
 }
 
@@ -104,7 +104,8 @@ export const colors: Colors = {
   gray3: '#343643',
   pink3: '#FF6FFF',
   pink4: '#BE61FF',
-  blackFaded: '#0D0E21',
+  blackFaded: '#0000004d',
+  blackSuperFaded: '#00000029',
   dimPink: '#d512d54d',
   darkBlue1: '#0d0e2166',
   halfWhite: '#ffffff80',
@@ -132,11 +133,12 @@ export interface Theme {
   fadedWhite: string
   dimPink: string
   pink3: string
-  tooltipBg: string
+  blackFaded: string
   secondaryButton: string
   halfWhite: string
   pink4: string
   black: string
+  blackSuperFaded: string
 }
 
 export const basicTheme: Theme = {
@@ -159,10 +161,11 @@ export const basicTheme: Theme = {
   pink3: colors.pink3,
   fadedWhite: colors.fadedWhite,
   dimPink: colors.dimPink,
-  tooltipBg: colors.blackFaded,
+  blackFaded: colors.blackFaded,
   secondaryButton: colors.darkBlue1,
   halfWhite: colors.halfWhite,
   pink4: colors.pink4,
+  blackSuperFaded: colors.blackSuperFaded,
 }
 
 export const lightTheme: Theme = {
@@ -185,10 +188,11 @@ export const lightTheme: Theme = {
   fadedWhite: colors.fadedWhite,
   dimPink: colors.dimPink,
   pink3: colors.pink3,
-  tooltipBg: colors.blackFaded,
+  blackFaded: colors.blackFaded,
   secondaryButton: colors.darkBlue1,
   halfWhite: colors.halfWhite,
   pink4: colors.pink4,
+  blackSuperFaded: colors.blackSuperFaded,
 }
 
 export enum Themes {

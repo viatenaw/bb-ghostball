@@ -11,7 +11,7 @@ export const Mint: React.FC = withTheme((props: ThemeProps<any>) => {
   const { theme } = props
 
   return (
-    <MintContainer>
+    <MintContainer id="#mint">
       <Markings top />
       <MintArea>
         <BrandingImg src={brandingImg} alt="bb-ghosball-branfing" />
