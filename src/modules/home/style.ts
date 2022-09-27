@@ -202,6 +202,12 @@ export const Card = styled.div`
   height: 320px;
   background: ${(props: ThemeProps<any>) => props.theme.fadedWhite};
   border-radius: 10px;
+  @media (max-width: ${screenSizes.XL}px) {
+    width: 260px;
+  }
+  @media (max-width: ${screenSizes.L}px) {
+    width: 240px;
+  }
 `
 interface ICardProps {
   marginTop?: string
@@ -210,6 +216,16 @@ export const CardsContainer = styled.div`
   margin-top: ${(props: ICardProps) => props.marginTop || '2em'};
   display: flex;
   gap: 140px;
+
+  @media (max-width: ${screenSizes.XXL}px) {
+    gap: 120px;
+  }
+  @media (max-width: ${screenSizes.XL}px) {
+    gap: 50px;
+  }
+  @media (max-width: ${screenSizes.L}px) {
+    gap: 40px;
+  }
   @media (max-width: ${screenSizes.M}px) {
     flex-direction: column;
     gap: 48px;
@@ -232,6 +248,15 @@ export const CornerBox = styled.div`
   border: 1px solid white;
   border-left: none;
   border-radius: 0 24px 24px 0;
+  @media (max-width: ${screenSizes.XXL}px) {
+    width: 160px;
+  }
+  @media (max-width: ${screenSizes.XL}px) {
+    width: 120px;
+  }
+  @media (max-width: ${screenSizes.L}px) {
+    width: 90px;
+  }
 `
 export const LineRight = styled.div`
   height: 1px;
@@ -241,6 +266,9 @@ export const LineRight = styled.div`
   top: 50%;
   left: 50%;
   transform: translateX(66.5px);
+  @media (max-width: ${screenSizes.XL}px) {
+    width: 60%;
+  }
   @media (max-width: ${screenSizes.M}px) {
     width: calc(50vw - 66.5px);
   }
@@ -255,6 +283,12 @@ export const LineLeft = styled.div`
   -webkit-transform: translateX(-66.5px);
   -ms-transform: translateX(-66.5px);
   transform: translateX(-66.5px);
+  @media (max-width: ${screenSizes.XL}px) {
+    width: 50%;
+  }
+  @media (max-width: ${screenSizes.M}px) {
+    width: calc(50vw - 66.5px);
+  }
 `
 
 export const ImageWrapper = styled.div`
@@ -273,6 +307,16 @@ export const CardTextWrapper = styled.div`
   gap: 16px;
   justify-content: space-between;
   height: 100%;
+  @media (max-width: ${screenSizes.L}px) {
+    p:first-child {
+      font-size: 30px;
+      margin: 0;
+    }
+    p:nth-child(2) {
+      font-size: 14px;
+      margin: 0;
+    }
+  }
 `
 
 export const BlankItem = styled.div`

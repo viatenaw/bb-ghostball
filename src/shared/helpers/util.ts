@@ -12,6 +12,11 @@ export enum AgentType {
   individual = 1,
   entity = 2,
 }
+export const formatAddress = (walletAddress?: any, numOfCharsL = 6, numOfCharsR = 4) => {
+  const address = walletAddress?.toString()
+
+  return `${address?.substr(0, numOfCharsL)}...${address?.substr(address.length - numOfCharsR, address.length)}`
+}
 
 export function roundFloat(value: number | undefined): number {
   return value ? parseFloat(value.toFixed(2)) : 0

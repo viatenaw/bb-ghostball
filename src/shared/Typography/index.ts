@@ -26,14 +26,36 @@ export const Heading3 = styled.p`
   font-family: 'Inter', sans-serif;
 `
 export const MarkingText = styled.p<ITextProps>`
-  color: ${(props: any) => props.theme.black};
+  color: ${(props: any) => props.fColor || props.theme.black};
   font-size: ${(props: any) => props.fSize || '24px'};
   font-style: italic;
   line-height: 29px;
   font-weight: ${(props: any) => props.fWeight || '600'};
   font-family: 'Inter', sans-serif;
 `
-
+export const WalletText = styled.p<ITextProps>`
+  color: ${(props: any) => props.fColor || props.theme.white};
+  font-size: ${(props: any) => props.fSize || '20px'};
+  font-style: italic;
+  line-height: 24px;
+  font-weight: ${(props: any) => props.fWeight || '600'};
+  font-family: 'Inter', sans-serif;
+  @media (max-width: ${screenSizes.M}px) {
+    font-size: ${(props: any) => props.fontSizeM || '16px'};
+  }
+`
+export const UnderLineText = styled.p<ITextProps>`
+  color: ${(props: any) => props.fColor || props.theme.white};
+  font-size: ${(props: any) => props.fSize || '20px'};
+  font-style: italic;
+  line-height: 24px;
+  font-weight: ${(props: any) => props.fWeight || '600'};
+  font-family: 'Inter', sans-serif;
+  text-decoration: underline;
+  @media (max-width: ${screenSizes.M}px) {
+    font-size: ${(props: any) => props.fontSizeM || '16px'};
+  }
+`
 export const BolderText = styled.p<ITextProps>`
   color: ${(props: any) => props.fColor};
   font-family: 'Inter', sans-serif;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { ThemeProps } from 'styled-components'
 import { HiOutlineMenu } from 'react-icons/hi'
 import { IoCloseOutline } from 'react-icons/io5'
 import { screenSizes } from '../../../styles/theme'
@@ -102,4 +102,37 @@ export const Navigations = styled.nav`
     }
   }
 }
+`
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  gap: 12px;
+`
+
+export const WalletCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 255px;
+  height: 145px;
+  background: ${(props: ThemeProps<any>) => props.theme.fadedWhite};
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 55px;
+    @media (max-width: ${screenSizes.M}px) {
+      height: 40px;
+    }
+  }
+  padding: 0 5px;
+  border-radius: 10px;
+  :hover {
+    cursor: pointer;
+  }
+`
+export const Row = styled.div`
+  display: flex;
+  gap: 24px;
 `

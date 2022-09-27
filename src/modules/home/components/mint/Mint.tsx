@@ -1,4 +1,6 @@
 import { withTheme, ThemeProps } from 'styled-components'
+import { useWeb3React } from '@web3-react/core'
+
 import { BrandingImg, FieldMarkingContainer, InputContainer, MintArea, MintContainer } from './style'
 import brandingImg from '../../../../assets/images/GBNFT_Logo Right_Black 1.svg'
 import { Heading3, MarkingText } from '../../../../shared/Typography'
@@ -6,22 +8,39 @@ import { Button } from '../../../../shared/button'
 import { useIsMobileScreen } from '../../../../shared/hooks/useIsMobileScreen'
 import { useEffect, useState } from 'react'
 import { CustomInput } from '../../../../shared/customInput'
+import { CONNECT_WALLET_TEXT, MINT_NOW_TEXT } from '../../../../shared/helpers/text'
+import { useDispatch } from 'react-redux'
+import { setConnectWallet } from '../../../../logic/redux/actions'
 
 export const Mint: React.FC = withTheme((props: ThemeProps<any>) => {
   const { theme } = props
+
+  const dispatch = useDispatch()
+  const { active, account } = useWeb3React<any>()
+
+  const handleConnectWallet = () => {
+    dispatch(setConnectWallet(true))
+    document.body.style.overflow = 'hidden'
+  }
 
   return (
     <MintContainer id="#mint">
       <Markings top />
       <MintArea>
         <BrandingImg src={brandingImg} alt="bb-ghosball-branfing" />
-        <Heading3>Mint your ghostball nft now</Heading3>
-        <InputContainer>
-          <Button shadowColor={theme.black} btnType="filledButton">
-            MINT NOW
+        <Heading3>{active && account ? MINT_NOW_TEXT : CONNECT_WALLET_TEXT}</Heading3>
+        {active && account ? (
+          <InputContainer>
+            <Button shadowColor={theme.black} btnType="filledButton">
+              MINT NOW
+            </Button>
+            <CustomInput maxLimit={5} type="number" />
+          </InputContainer>
+        ) : (
+          <Button onClick={handleConnectWallet} shadowColor={theme.black} btnType="filledButton">
+            Connect Wallet
           </Button>
-          <CustomInput maxLimit={5} type="number" />
-        </InputContainer>
+        )}
       </MintArea>
       <Markings />
     </MintContainer>

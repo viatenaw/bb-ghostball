@@ -13,6 +13,8 @@ export const TEAM_TEXT = 'Meet our team'
 export const FAQ_TEXT = "FAQ's"
 
 export const CR_TEXT = 'Copyright © 2022 Blackbeard Development Group. All Rights Reserved.'
+export const MINT_NOW_TEXT = 'Mint your ghostball nft now'
+export const CONNECT_WALLET_TEXT = 'Connect wallet to get started'
 
 export const CARD_1_DETAILS_TEXT =
   'If you made a new account, buy some Ethereum. The MetaMask plugin has a button that will allow you to buy Ether from Coinbase.'

@@ -37,6 +37,15 @@ export const SVGIcon = styled.img<IFlexProps>`
     height: ${(props: any) => props.heightM};
   }
 `
+export const RoundSVGIcon = styled.img<IFlexProps>`
+  width: ${(props: any) => props.width || '65px'};
+  height: ${(props: any) => props.height || '65px'};
+  border-radius: 50%;
+  @media (max-width: ${screenSizes.M}px) {
+    width: ${(props: any) => props.widthM};
+    height: ${(props: any) => props.heightM};
+  }
+`
 export const CircleCntr = styled.div`
   height: 80px;
   z-index: 1;
