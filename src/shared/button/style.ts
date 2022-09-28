@@ -69,6 +69,8 @@ const buttonStyles = css`
     padding: 0 5px;
     white-space: pre;
     vertical-align: middle;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
   }
   position: relative;
   overflow: hidden;
@@ -118,10 +120,10 @@ const warning = css`
 `
 
 const walletButton = css`
-  background: ${(props: any) => props.theme.secondary};
-  border-radius: 50px;
-  border: 1px solid ${(props: any) => props.theme.pink1};
-  color: ${(props: any) => props.theme.gray2};
+  background: transparent;
+  border-radius: 98px;
+  border: 1px solid ${(props: any) => props.theme.primary};
+  color: ${(props: any) => props.theme.primary};
   transition: all linear 0.3s;
   :hover,
   :focus {
@@ -135,13 +137,21 @@ const walletButton = css`
     background: ${(props: any) => props.theme.disabled};
   }
 
-  min-width: 200px;
-  height: 50px;
+  width: 160px;
+  height: 44px;
   font-size: 18px;
 
   @media (max-width: ${screenSizes.M}px) {
-    max-width: 200px;
+    max-width: 160px;
   }
+  .content {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  padding: 0px;
 `
 const filledButton = css`
   background: ${(props: any) => props.theme.black};

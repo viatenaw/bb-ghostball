@@ -168,7 +168,7 @@ export const DetailsContainerAbout = styled.div`
 export const Avatar1 = styled.img`
   width: 590px;
   height: 520px;
-  @media (max-width: ${screenSizes.M}px) {
+  @media (max-width: ${screenSizes.ML}px) {
     width: 355px;
     height: 310px;
   }
@@ -207,6 +207,9 @@ export const Card = styled.div`
   }
   @media (max-width: ${screenSizes.L}px) {
     width: 240px;
+  }
+  @media (max-width: ${screenSizes.ML}px) {
+    width: 220px;
   }
 `
 interface ICardProps {
@@ -256,6 +259,9 @@ export const CornerBox = styled.div`
   }
   @media (max-width: ${screenSizes.L}px) {
     width: 90px;
+  }
+  @media (max-width: ${screenSizes.ML}px) {
+    width: 70px;
   }
 `
 export const LineRight = styled.div`
@@ -316,6 +322,10 @@ export const CardTextWrapper = styled.div`
       font-size: 14px;
       margin: 0;
     }
+  }
+  @media (max-width: ${screenSizes.ML}px) {
+    gap: 10px;
+    padding: 20px;
   }
 `
 

@@ -5,6 +5,7 @@ export interface Sizes {
   XS: number | string
   S: number | string
   M: number | string
+  ML?: number | string
   L: number | string
   XL: number | string
   XXL: number | string
@@ -23,6 +24,7 @@ export const screenSizes: Partial<Sizes> = {
   XS: 480,
   S: 640,
   M: 768,
+  ML: 820,
   L: 1024,
   XL: 1280,
   XXL: 1440,
@@ -96,8 +98,8 @@ export const colors: Colors = {
   white1: '#ffffff4d',
   pink1: '#D412D4',
   pink2: '#b912be',
-  gray1: '#DFDFDF',
-  gray2: '#EAECF0',
+  gray1: '#646161',
+  gray2: '#C7C7C7',
   darkestGray: '#0F111E',
   purple1: '#d512d533',
   purple2: '#ff6fff4d',
@@ -116,7 +118,7 @@ export const colors: Colors = {
 export interface Theme {
   [propName: string]: string | ThemeWithStates | { [propName: string]: ThemeWithStates } | undefined
   navPrimaryText: string
-  navActiveText: string
+  gray1: string
   primary: string
   secondary: string
   pink1: string
@@ -143,7 +145,7 @@ export interface Theme {
 
 export const basicTheme: Theme = {
   navPrimaryText: colors.white1,
-  navActiveText: colors.gray1,
+  gray1: colors.gray1,
   secondary: colors.darkBlue,
   primary: colors.brightGreen,
   darkGray: colors.darkGray,
@@ -170,7 +172,7 @@ export const basicTheme: Theme = {
 
 export const lightTheme: Theme = {
   navPrimaryText: colors.white1,
-  navActiveText: colors.gray1,
+  gray1: colors.gray1,
   primary: colors.brightGreen,
   secondary: colors.darkBlue,
   pink1: colors.pink1,

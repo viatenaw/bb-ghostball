@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ReactComponentElement } from 'react'
 
 import { matchesPath } from '../helpers/util'
-import { homePath } from '../../logic/paths'
+import { homePath, rootPath } from '../../logic/paths'
 import { Navbar } from '../../modules/app/navbar/Navbar'
 import { Mint } from '../../modules/home/components/mint'
 
@@ -26,7 +26,7 @@ const FixedHeader = styled.div<any>`
 
 export const Header = (props: any) => {
   const userExists = true
-
+  const { path } = props
   const matchUrls = (urls: string[]) => {
     let value: boolean = false
     urls.forEach((url) => {
@@ -39,7 +39,7 @@ export const Header = (props: any) => {
 
   return userExists && !noHeader ? (
     <FixedHeader showBorder={!noHeader}>
-      <Navbar />
+      <Navbar path={path} />
     </FixedHeader>
   ) : null
 }
@@ -49,8 +49,8 @@ export function withHeader(InnerComponent: any, path: any) {
 
   return (props: any) => (
     <React.Fragment>
-      {path === '/' && <Mint />}
-      <Header {...props} />
+      {path === rootPath && <Mint />}
+      <Header path={path} {...props} />
       <InnerComponent {...props} />
     </React.Fragment>
   )

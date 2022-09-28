@@ -18,7 +18,8 @@ export const injected = new InjectedConnector({
 
 export const walletlink = new WalletLinkConnector({
   url: `https://mainnet.infura.io/v3/0fe795d7c0254f8096cdeba845d83e99`,
-  appName: 'Ghostball',
+  appName: 'ghostball',
+  supportedChainIds: [1, 3, 4, 5, 42, 56, 97, 137],
 })
 
 const selectRpc = (type: number): any => {
@@ -29,9 +30,30 @@ const selectRpc = (type: number): any => {
       }
   }
 }
+export function activateInjectedProvider(providerName: 8 | 1) {
+  const { ethereum }: any = window
 
+  if (!ethereum?.providers) {
+    return undefined
+  }
+
+  let provider
+  switch (providerName) {
+    case 8:
+      provider = ethereum.providers.find(({ isCoinbaseWallet }: any) => isCoinbaseWallet)
+      break
+    case 1:
+      provider = ethereum.providers.find(({ isMetaMask }: any) => isMetaMask)
+      break
+  }
+
+  if (provider) {
+    ethereum.setSelectedProvider(provider)
+  }
+}
 const useAuth = () => {
-  const { activate, deactivate } = useWeb3React()
+  const { activate, deactivate, connector } = useWeb3React()
+
   let walletconnect: any
   const login = useCallback(
     (connectorID: any) => {
@@ -43,7 +65,7 @@ const useAuth = () => {
         bridge: 'https://bridge.walletconnect.org',
       })
 
-      const selecWallet = (type: number): any => {
+      const selectInjector = (type: number): any => {
         switch (type) {
           case 1:
             return injected
@@ -53,14 +75,12 @@ const useAuth = () => {
             return walletlink
         }
       }
+
       if (true) {
-        console.log('connectorID', connectorID)
-
-        activate(selecWallet(connectorID), async (error) => {
-          console.log('error in connecting', connectorID, error)
-
+        if (connectorID === 8 || connectorID === 1) activateInjectedProvider(connectorID)
+        activate(selectInjector(connectorID), async (error) => {
           if (error instanceof UnsupportedChainIdError) {
-            activate(selecWallet(connectorID))
+            activate(selectInjector(connectorID))
           } else {
             if (error instanceof NoEthereumProviderError) {
             } else if (

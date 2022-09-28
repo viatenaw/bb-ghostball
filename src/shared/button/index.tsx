@@ -27,6 +27,7 @@ interface ButtonProps {
   minWidthSpan?: string
   shadowColor?: string
   customBorder?: string
+  excludeSpan?: boolean
 }
 
 export const Button = (props: ButtonProps) => {
@@ -56,6 +57,7 @@ export const Button = (props: ButtonProps) => {
     tile,
     customPadding,
     bRadius,
+    excludeSpan = false,
   } = props
 
   const [isRippling, setIsRippling] = useState<boolean>(false)
@@ -111,7 +113,7 @@ export const Button = (props: ButtonProps) => {
         ) : (
           ''
         )}
-        <span className="content">{children}</span>
+        {!excludeSpan ? <span className="content">{children}</span> : children}
       </ButtonWrapper>
     </ButtonAlignment>
   )

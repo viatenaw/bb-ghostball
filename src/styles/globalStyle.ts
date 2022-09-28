@@ -118,7 +118,20 @@ export const GlobalStyle = createGlobalStyle`
   input[type=number] {
     -moz-appearance: textfield;
   }
-
+  .closingModal {
+    display: flex !important;
+    pointer-events: none;
+    inset: 0;
+    animation: fade-out 300ms forwards;
+  }
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
   p {
     margin: 0;

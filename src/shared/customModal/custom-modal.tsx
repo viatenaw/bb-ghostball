@@ -51,8 +51,8 @@ const CustomModal = (props: IModalProps) => {
 
   const [closingModal, setClosingModal] = useState('')
   const handleToggle = (show: boolean) => {
-    toggleModal(show)
     setClosingModal('closingModal')
+    toggleModal(show)
     setTimeout(() => {
       setClosingModal('')
     }, 300)

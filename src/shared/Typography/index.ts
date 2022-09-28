@@ -46,10 +46,10 @@ export const WalletText = styled.p<ITextProps>`
 `
 export const UnderLineText = styled.p<ITextProps>`
   color: ${(props: any) => props.fColor || props.theme.white};
-  font-size: ${(props: any) => props.fSize || '20px'};
+  font-size: ${(props: any) => props.fSize || '14px'};
   font-style: italic;
   line-height: 24px;
-  font-weight: ${(props: any) => props.fWeight || '600'};
+  font-weight: ${(props: any) => props.fWeight || '500'};
   font-family: 'Inter', sans-serif;
   text-decoration: underline;
   @media (max-width: ${screenSizes.M}px) {

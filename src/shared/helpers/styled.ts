@@ -11,6 +11,7 @@ interface IFlexProps {
   align?: string
   padding?: string
   maxwidthM?: string
+  marginLeft?: string
 }
 export const FlexRow = styled.div<IFlexProps>`
   display: flex;
@@ -40,11 +41,12 @@ export const SVGIcon = styled.img<IFlexProps>`
 export const RoundSVGIcon = styled.img<IFlexProps>`
   width: ${(props: any) => props.width || '65px'};
   height: ${(props: any) => props.height || '65px'};
-  border-radius: 50%;
+  border-radius: 48px;
   @media (max-width: ${screenSizes.M}px) {
     width: ${(props: any) => props.widthM};
     height: ${(props: any) => props.heightM};
   }
+  margin-left: ${(props: any) => props.marginLeft};
 `
 export const CircleCntr = styled.div`
   height: 80px;

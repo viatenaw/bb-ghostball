@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { withTheme } from 'styled-components'
+
 import { FlexBox } from '../../../shared/flexBox'
 import {
   BtnContainer,
@@ -32,10 +32,10 @@ import { WalletTypes } from '../../../wallet_helpers/constant'
 import { RoundSVGIcon, SVGIcon } from '../../../shared/helpers/styled'
 import { formatAddress } from '../../../shared/helpers/util'
 import { MarkingText, UnderLineText, WalletText } from '../../../shared/Typography'
+import { nftsPath, rootPath } from '../../../logic/paths'
 
-export const Navbar: React.FC = withTheme((props: any) => {
-  const { theme } = props
-
+export const Navbar = (props: any) => {
+  const { path } = props
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const globalSelector = useSelector((state: any) => state)
@@ -115,13 +115,15 @@ export const Navbar: React.FC = withTheme((props: any) => {
       }
     }
   }
+  console.log('currentPath === rootPath ', path === rootPath, path, rootPath)
+
   return (
     <>
       <HeaderContainer>
         <FlexBox>
           <LogoContainer
             onClick={() => {
-              navigate('/')
+              navigate(rootPath)
               setIsNavExpanded(false)
               goToElement('#about')
             }}
@@ -137,29 +139,45 @@ export const Navbar: React.FC = withTheme((props: any) => {
                 <NavLink
                   className={({ isActive }) => (isActive ? 'active-route' : 'inactive-route')}
                   onClick={() => handleHandBurgerAction('#mint')}
-                  to={'/'}
+                  to={rootPath}
                 >
                   Home
                 </NavLink>
-                <NavLink onClick={() => handleHandBurgerAction('#road-map')} to={'#road-map'}>
-                  Road Map
-                </NavLink>
-                <NavLink onClick={() => handleHandBurgerAction('#team')} to={'#team'}>
-                  Team
-                </NavLink>
-                <NavLink onClick={() => handleHandBurgerAction('#faq')} to={'#faq'}>
-                  FAQ
-                </NavLink>
+                {path === rootPath && (
+                  <>
+                    <NavLink onClick={() => handleHandBurgerAction('#road-map')} to={'/#road-map'}>
+                      Road Map
+                    </NavLink>
+                    <NavLink onClick={() => handleHandBurgerAction('#team')} to={'/#team'}>
+                      Team
+                    </NavLink>
+                    <NavLink onClick={() => handleHandBurgerAction('#faq')} to={'/#faq'}>
+                      FAQ
+                    </NavLink>
+                  </>
+                )}
 
+                <NavLink to={nftsPath} className={({ isActive }) => (isActive ? 'active-route' : 'inactive-route')}>
+                  NFTs
+                </NavLink>
                 {account ? (
                   <>
                     <Button
                       btnType={'walletButton'}
                       className={'walletNavButton'}
                       onClick={() => handleDisConnectwallet(true)}
+                      excludeSpan
+                      customBorder={`1px solid #646161`}
+                      customColor={'#C7C7C7'}
                     >
                       <BtnContainer>
-                        <RoundSVGIcon height="24px" width="24px" src={richardAvatar} alt="user-avatar" />
+                        <RoundSVGIcon
+                          marginLeft="5px"
+                          height="34px"
+                          width="34px"
+                          src={richardAvatar}
+                          alt="user-avatar"
+                        />
                         <span>{formatAddress(account)}</span>
                       </BtnContainer>
                     </Button>
@@ -231,9 +249,10 @@ export const Navbar: React.FC = withTheme((props: any) => {
               document.body.style.overflow = 'unset'
             }}
           >
-            <UnderLineText>New to NFT learn more about wallet?</UnderLineText>
+            <UnderLineText>Coming soon..</UnderLineText>
           </WalletCard>
         </Row>
+        <UnderLineText>New to NFT learn more about wallet?</UnderLineText>
       </CustomModal>
 
       <CustomModal
@@ -246,7 +265,9 @@ export const Navbar: React.FC = withTheme((props: any) => {
         <Button
           fSize="13px"
           fontLS="0.05em"
-          customBgColor={theme.darkestGray}
+          customColor="#BAFF18"
+          customBorder={`2px solid #BAFF18`}
+          customBgColor="transparent"
           btnType={'borderedfilledButton'}
           onClick={() => disconnect()}
         >
@@ -255,4 +276,4 @@ export const Navbar: React.FC = withTheme((props: any) => {
       </CustomModal>
     </>
   )
-})
+}

@@ -74,6 +74,7 @@ import richardAvatar from '../../assets/images/Rectangle 15.png'
 
 import { useIsMobileScreen } from '../../shared/hooks/useIsMobileScreen'
 import { useEffect, useRef, useState } from 'react'
+import { UseIsBigScreen } from '../../shared/hooks/useIsBigScreen'
 
 export const Home: React.FC = withTheme((props: ThemeProps<any>) => {
   const { theme } = props
@@ -342,6 +343,9 @@ const RoadMapCard = (props: ICardProps) => {
 
 const Team = (props: any) => {
   const { theme } = props
+  const isbigScreen = UseIsBigScreen()
+  console.log('isbigScreen', isbigScreen)
+
   return (
     <ContainerTeam id="#team">
       <RoadMapHead>
@@ -360,12 +364,11 @@ const Team = (props: any) => {
         <TeamCard />
         <TeamCard />
         <TeamCard />
-        <BlankItem />
+        {/* {isbigScreen && <BlankItem />} */}
         <TeamCard />
         <TeamCard />
         <TeamCard />
         <TeamCard />
-        <BlankItem />
       </TeamCardsContainer>
     </ContainerTeam>
   )

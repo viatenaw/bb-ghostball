@@ -11,8 +11,8 @@ export const HeaderContainer = styled.header`
   backdrop-filter: blur(8px);
   background: #000 url(${starBG});
   .active-route {
-    // color: ${(props: any) => props.theme.primary} !important;
-    // border-bottom: 1px solid ${(props: any) => props.theme.primary};
+    color: ${(props: any) => props.theme.primary} !important;
+    border-bottom: 1px solid ${(props: any) => props.theme.primary};
   }
   z-index: 999;
   @media (min-width: ${screenSizes.XXL}px) {
@@ -51,6 +51,8 @@ export const NavContainer = styled.div`
 `
 export const NavMenu = styled.div`
   display: flex;
+  gap: 36px;
+  align-items: center;
 `
 export const Navigations = styled.nav`
   display: flex;
@@ -63,11 +65,8 @@ export const Navigations = styled.nav`
     font-size: 18px;
     text-decoration: none;
     color: ${(props: any) => props.theme.white};
-    padding: 15px 20px;
-    margin: 0 10px;
     transition: border-color .3s ease;
     transition: border-width .3s ease;
-
     border-bottom: 0px solid;
     &:hover {
         border-width: 1px;
@@ -100,15 +99,26 @@ export const Navigations = styled.nav`
       transform: translate(-50%, 0%);
       align-items: center;
     }
+    a {
+      padding: 0px;
+    }
   }
 }
 `
 export const BtnContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
-  padding: 0 25px;
-  gap: 12px;
+  gap: 6px;
+  backdrop-filter: blur(2.5px);
+  span {
+    font-size: 14px;
+    font-style: italic;
+    line-height: 17px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    padding-top: 1px;
+  }
 `
 
 export const WalletCard = styled.div`
