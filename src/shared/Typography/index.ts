@@ -15,6 +15,7 @@ interface ITextProps {
   fLineHeightMb?: string
   width?: string
   fontSizeM?: string
+  wSpace?: string
 }
 
 export const Heading3 = styled.p`
@@ -63,6 +64,9 @@ export const BolderText = styled.p<ITextProps>`
   font-weight: 900;
   font-size: 36px;
   line-height: 44px;
+  @media (max-width: ${screenSizes.M}px) {
+    font-size: ${(props: any) => props.fontSizeM};
+  }
 `
 
 export const BigBolderText = styled.p<ITextProps>`
@@ -97,6 +101,7 @@ export const CardBodyText = styled.p<ITextProps>`
   @media (max-width: ${screenSizes.M}px) {
     font-size: ${(props: any) => props.fontSizeM};
   }
+  white-space: ${(props: any) => props.wSpace};
 `
 export const SmallText = styled.p<ITextProps>`
   color: ${(props: any) => props.fColor};

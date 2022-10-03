@@ -11,4 +11,5 @@ export interface UserUrlProps extends UserProps {
 export const rootPath: UrlPath<{}> = '/'
 export const homePath: UrlPath<{}> = '/home'
 export const nftsPath: UrlPath<{}> = '/nfts'
+export const nftPath: UrlPath<{}> = '/nfts/:id'
 export const userPath: UrlPath<UserUrlProps> = `${homePath}/user/:user`

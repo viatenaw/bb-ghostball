@@ -12,6 +12,7 @@ interface IFlexProps {
   padding?: string
   maxwidthM?: string
   marginLeft?: string
+  borderRadius?: string
 }
 export const FlexRow = styled.div<IFlexProps>`
   display: flex;
@@ -37,6 +38,7 @@ export const SVGIcon = styled.img<IFlexProps>`
     width: ${(props: any) => props.widthM};
     height: ${(props: any) => props.heightM};
   }
+  border-radius: ${(props: any) => props.borderRadius};
 `
 export const RoundSVGIcon = styled.img<IFlexProps>`
   width: ${(props: any) => props.width || '65px'};

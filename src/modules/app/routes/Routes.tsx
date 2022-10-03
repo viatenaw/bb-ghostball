@@ -1,7 +1,9 @@
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { rootPath } from '../../../logic/paths'
+import { nftsPath, rootPath, nftPath } from '../../../logic/paths'
 import { withHeader } from '../../../shared/hocs/withHeader'
+import { NFTDashboard } from '../../dashboard/NFTDashboard'
 import { Home } from '../../home/Home'
+import { NFT } from '../../nft/NFT'
 
 const notFoundRoute: RouteDefinition = {
   path: '*',
@@ -16,6 +18,20 @@ export const routes: RouteDefinition[] = [
     element: Home,
     protected: false,
     title: 'Home',
+    pathType: 0,
+  },
+  {
+    path: nftsPath,
+    element: NFTDashboard,
+    protected: false,
+    title: 'NFT Dashboard',
+    pathType: 0,
+  },
+  {
+    path: nftPath,
+    element: NFT,
+    protected: false,
+    title: 'NFT',
     pathType: 0,
   },
   notFoundRoute,

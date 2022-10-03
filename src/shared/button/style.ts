@@ -226,17 +226,17 @@ const borderedfilledLightButton = css`
     font-size: 16px;
   }
 `
-const dimBorderedfilledButton = css`
-  background: ${(props: any) => props.theme.secondary};
-  border-radius: 10px;
+const tileButton = css`
+  background: ${(props: any) => props.theme.fadedWhite};
+  border-radius: 50px;
   color: ${(props: any) => props.theme.white};
-  font-size: 18px;
-  border: 1px solid ${(props: any) => props.theme.dimPink};
+  font-size: 16px;
+  border: none;
   transition: all linear 0.3s;
   width: 100%;
   :hover,
   :focus {
-    box-shadow: 0px 0px 5px ${(props: any) => props.theme.primaryButton};
+    box-shadow: 0px 0px 5px ${(props: any) => props.theme.primary};
   }
   min-width: 60px;
   :disabled {
@@ -249,14 +249,14 @@ const dimBorderedfilledButton = css`
     font-size: 16px;
   }
 `
-const roundedfilledButton = css`
+const borderButton = css`
   min-width: 65px;
   min-height: 32px;
-  background: ${(props: any) => props.theme.gray3};
+  background: transparent;
   border-radius: 10px;
   color: ${(props: any) => props.theme.white};
-  font-size: 13px;
-  border: 1px solid ${(props: any) => props.theme.pink1};
+  font-size: 16px;
+  border: 1px solid ${(props: any) => props.theme.white};
   transition: all linear 0.3s;
   width: 100%;
   :hover,
@@ -288,9 +288,9 @@ const buttonWrapperStyles: any = {
   disabled,
   walletButton,
   borderedfilledButton,
-  roundedfilledButton,
+  borderButton,
   filledButton,
-  dimBorderedfilledButton,
+  tileButton,
   borderedfilledLightButton,
 }
 
@@ -301,7 +301,7 @@ interface IButtonWrapper {
     | 'disabled'
     | 'warning'
     | 'walletButton'
-    | 'borderedfilledButton| roundedfilledButton | filledButton | dimBorderedfilledButton | borderedfilledLightButton'
+    | 'borderedfilledButton| borderButton | filledButton | tileButton | borderedfilledLightButton'
   customColor?: string
   customBgColor?: string
   customWidth?: string

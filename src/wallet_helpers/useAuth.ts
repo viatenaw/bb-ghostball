@@ -10,12 +10,13 @@ import {
 } from '@web3-react/walletconnect-connector'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
+import Web3 from 'web3'
 
 const POLLING_INTERVAL = 12000
 export const injected = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42, 56, 97, 137],
 })
-
+export const web3 = new Web3(Web3.givenProvider || 'https://mainnet.infura.io/v3/0fe795d7c0254f8096cdeba845d83e99')
 export const walletlink = new WalletLinkConnector({
   url: `https://mainnet.infura.io/v3/0fe795d7c0254f8096cdeba845d83e99`,
   appName: 'ghostball',
