@@ -41,3 +41,6 @@ export const DETAILS_ABOUT_TEXT1 =
   'When a wraith daddy and a banshee mommy love each other very much, something magical happens. Out of the cabbage patch next to the graveyard rises a brand new generation of revenants! At pre-K, Baby Ghosts make friends and discover the world, until one day, the whole daycare is exorcised and all Baby Ghosts are released!'
 export const DETAILS_ABOUT_TEXT2 =
   'Now lost spirits and spread to the wind, Baby Ghosts are free to haunt throughout the Earth.'
+
+export const SELECT_PRIMARY_COLOR = 'Select Primary color'
+export const SELECT_SECONDARY_COLOR = 'Select Secondary color'

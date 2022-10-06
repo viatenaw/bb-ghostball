@@ -1,4 +1,4 @@
-import styled, { ThemeProps } from 'styled-components'
+import styled, { ThemeProps, css } from 'styled-components'
 import { screenSizes } from '../../styles/theme'
 
 interface IFlexProps {
@@ -11,7 +11,7 @@ interface IFlexProps {
   align?: string
   padding?: string
   maxwidthM?: string
-  marginLeft?: string
+  margin?: string
   borderRadius?: string
 }
 export const FlexRow = styled.div<IFlexProps>`
@@ -48,7 +48,7 @@ export const RoundSVGIcon = styled.img<IFlexProps>`
     width: ${(props: any) => props.widthM};
     height: ${(props: any) => props.heightM};
   }
-  margin-left: ${(props: any) => props.marginLeft};
+  margin: ${(props: any) => props.margin};
 `
 export const CircleCntr = styled.div`
   height: 80px;
@@ -67,4 +67,33 @@ export const Circle = styled.div<ICircleBarProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+export const LTRAnimationOnHover = css`
+  position: relative;
+  ::before {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+  }
+
+  :hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  ::before {
+    content: ' ';
+    border-radius: 10px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    inset: 0 0 0 0;
+    background: ${(props: any) => props.theme.primary};
+    z-index: 1;
+    transition: transform 0.3s ease;
+    opacity: 0.35;
+  }
 `

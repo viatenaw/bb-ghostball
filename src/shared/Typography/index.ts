@@ -62,7 +62,7 @@ export const BolderText = styled.p<ITextProps>`
   font-family: 'Inter', sans-serif;
   font-style: italic;
   font-weight: 900;
-  font-size: 36px;
+  font-size: ${(props: any) => props.fSize || '36px'};
   line-height: 44px;
   @media (max-width: ${screenSizes.M}px) {
     font-size: ${(props: any) => props.fontSizeM};
@@ -107,8 +107,8 @@ export const SmallText = styled.p<ITextProps>`
   color: ${(props: any) => props.fColor};
   font-family: 'Inter', sans-serif;
   font-style: italic;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: ${(props: any) => props.fWeight || '500'};
+  font-size: ${(props: any) => props.fSize || '16px'};
   line-height: 24px;
   @media (max-width: ${screenSizes.M}px) {
     font-size: ${(props: any) => props.fontSizeM || '14px'};

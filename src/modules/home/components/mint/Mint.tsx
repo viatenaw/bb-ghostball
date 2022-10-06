@@ -11,16 +11,43 @@ import { CustomInput } from '../../../../shared/customInput'
 import { CONNECT_WALLET_TEXT, MINT_NOW_TEXT } from '../../../../shared/helpers/text'
 import { useDispatch } from 'react-redux'
 import { setConnectWallet } from '../../../../logic/redux/actions'
+import { ComposableNFT } from '../../../../blockchain/instance'
 
+const nftCount = 1
 export const Mint: React.FC = withTheme((props: ThemeProps<any>) => {
   const { theme } = props
 
   const dispatch = useDispatch()
   const { active, account } = useWeb3React<any>()
-
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const handleConnectWallet = () => {
     dispatch(setConnectWallet(true))
     document.body.style.overflow = 'hidden'
+  }
+
+  const mintNFTs = async () => {
+    try {
+      setIsLoading(true)
+      const mintPrice = await ComposableNFT.methods.mintPrice().call()
+      console.log('mintPrice, ', mintPrice, typeof mintPrice)
+      await ComposableNFT.methods
+        .mint()
+        .send({ from: account, value: mintPrice })
+        .on('transactionHash', (hash: any) => {
+          console.log('txn hash', hash)
+        })
+        .on('receipt', (receipt: any) => {
+          setIsLoading(false)
+          console.log('txn completed', receipt)
+        })
+        .on('error', (e: any) => {
+          setIsLoading(false)
+          console.error('error in minting', e)
+        })
+    } catch (error) {
+      setIsLoading(false)
+      console.error('error in minting', error)
+    }
   }
 
   return (
@@ -31,10 +58,10 @@ export const Mint: React.FC = withTheme((props: ThemeProps<any>) => {
         <Heading3>{active && account ? MINT_NOW_TEXT : CONNECT_WALLET_TEXT}</Heading3>
         {active && account ? (
           <InputContainer>
-            <Button shadowColor={theme.black} btnType="filledButton">
+            <Button isDisabled={isLoading} onClick={mintNFTs} shadowColor={theme.black} btnType="filledButton">
               MINT NOW
             </Button>
-            <CustomInput maxLimit={5} type="number" />
+            <CustomInput maxLimit={1} type="number" value={nftCount} disable />
           </InputContainer>
         ) : (
           <Button onClick={handleConnectWallet} shadowColor={theme.black} btnType="filledButton">

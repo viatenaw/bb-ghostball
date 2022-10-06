@@ -1,4 +1,4 @@
-export const whiteListAddress: any = '0xf62c35832785B9d3EDb95B8Dd8C932771EAf05c0'
+export const whiteListAddress: any = '0x5A9855cD4fFAB8771c4EC9cb9d47Ff94FA2c99df'
 export const whiteListABI: any = [
   {
     inputs: [

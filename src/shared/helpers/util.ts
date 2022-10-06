@@ -8,6 +8,8 @@ export type StaticUrlPath = UrlPath<{}>
 export type Image = any
 export type StringMap = { [key: string]: string }
 
+export const FETCH_NFTS_URI = 'https://deep-index.moralis.io/api/v2'
+
 export enum AgentType {
   individual = 1,
   entity = 2,
@@ -16,6 +18,16 @@ export const formatAddress = (walletAddress?: any, numOfCharsL = 6, numOfCharsR 
   const address = walletAddress?.toString()
 
   return `${address?.substr(0, numOfCharsL)}...${address?.substr(address.length - numOfCharsR, address.length)}`
+}
+export function b64ToString(b64String: any): string {
+  const tokenStr = b64String.split(',')[1]
+  const tokenBuffer = Buffer.from(tokenStr, 'base64')
+  return tokenBuffer.toString()
+}
+
+export function stringToObjectURL(string: string): any {
+  let blob = new Blob([string], { type: 'image/svg+xml' })
+  return URL.createObjectURL(blob)
 }
 
 export function roundFloat(value: number | undefined): number {
@@ -158,8 +170,8 @@ export function formatQueryString(query: any): string {
 export function genericSum<T>(getter: (value: T) => number): (items: T[]) => number {
   // prettier-ignore
   return items => items
-        .map(getter)
-        .reduce((a, b) => a + b, 0)
+    .map(getter)
+    .reduce((a, b) => a + b, 0)
 }
 
 export function safeDivide(a: number, b: number): number {

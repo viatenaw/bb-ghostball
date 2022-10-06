@@ -85,6 +85,7 @@ export interface Colors {
   pink4: string
   blackSuperFaded: string
   brightGreen: string
+  red: string
 }
 
 export const colors: Colors = {
@@ -111,7 +112,7 @@ export const colors: Colors = {
   dimPink: '#d512d54d',
   darkBlue1: '#0d0e2166',
   halfWhite: '#ffffff80',
-
+  red: '#EA5454',
   brightGreen: '#BAFF18',
 }
 
@@ -141,10 +142,12 @@ export interface Theme {
   pink4: string
   black: string
   blackSuperFaded: string
+  red: string
 }
 
 export const basicTheme: Theme = {
   navPrimaryText: colors.white1,
+  red: colors.red,
   gray1: colors.gray1,
   secondary: colors.darkBlue,
   primary: colors.brightGreen,
@@ -172,6 +175,7 @@ export const basicTheme: Theme = {
 
 export const lightTheme: Theme = {
   navPrimaryText: colors.white1,
+  red: colors.red,
   gray1: colors.gray1,
   primary: colors.brightGreen,
   secondary: colors.darkBlue,

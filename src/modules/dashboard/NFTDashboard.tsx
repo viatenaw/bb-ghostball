@@ -1,44 +1,94 @@
+import { useWeb3React } from '@web3-react/core'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import { ThemeProps, withTheme } from 'styled-components'
-import { Container, NFTCardContainer, NFTListContainer } from './style'
-var Buffer = require('buffer/').Buffer
-let str =
-  'eyJuYW1lIjoiTkZUIENvbGxlY3Rpb24gbmFtZSAjMSIsICJkZXNjcmlwdGlvbiI6IldvcmxkJ3MgZmlyc3QgY29tcG9zYWJsZSBORlQiLCAiaW1hZ2UiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCcFpEMGlibVowTVNJZ2QybGtkR2c5SWpNd01DSWdhR1ZwWjJoMFBTSXpNREFpSUhacFpYZENiM2c5SWpBZ01DQXpNREFnTXpBd0lpQm1hV3hzUFNKdWIyNWxJaUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lQanhuSUdsa1BTSk1ZWGxsY2tKaFkydG5jbTkxYm1RaUlHTnZiRzl5UFNJalptWm1JajQ4Y21WamRDQm1hV3hzUFNKamRYSnlaVzUwUTI5c2IzSWlJSGRwWkhSb1BTSXhNREFsSWlCb1pXbG5hSFE5SWpFd01DVWlQand2Y21WamRENDhMMmMrUEdjZ2FXUTlJa3hoZVdWeVFtOWtlU0lnWTI5c2IzSTlJaU13TURBaVBqeG5JSFJ5WVc1elptOXliVDBpYldGMGNtbDRLREF1TVRJME5UQTVMREV1TlRJME9HVXRNVGNzTVM0MU1qUTRaUzB4Tnl3dE1DNHhNalExTURrc0xUTTJMakUyT0Rnc016STVMamczTkNraVBqeHdZWFJvSUdROUlrMHhPVFkyTERJME56bERNVGswTkN3eU5EYzBJREU0T1Rjc01qUTFOU0F4T0RZeExESTBNemhETVRnd01Td3lOREE1SURFM016WXNNak0wTnlBeE1UQTNMREUzTWpGRE16azJMREV3TVRJZ016azBMREV3TVRBZ05ETXlMRGszTWtNME16a3NPVFkxSURRMU1pdzVOakFnTkRZekxEazJNRU0wTnpNc09UWXdJRFU1TWl3eE1ESTBJRGN5Tnl3eE1UQXhRemswTXl3eE1qSTJJRGszTml3eE1qUXlJRGs1T1N3eE1qTTBRekV3TlRrc01USXhNeUF4TURRNUxERXhPVFVnTnpZMkxEZ3pNa00yTWpBc05qUTBJRFE1Tml3ME9ESWdORGt3TERRM01FTTBOekVzTkRNMElEVXhPQ3d6T0RVZ05UVXhMRFF3TmtNMU5UZ3NOREV3SURjM05TdzFPREFnTVRBek5DdzNPRFZETVRJNU15dzVPRGtnTVRVeE5Dd3hNVFl4SURFMU1qVXNNVEUyTjBNeE5UVXhMREV4T0RFZ01UVTROaXd4TVRZM0lERTFPVFVzTVRFME1VTXhOVGs1TERFeE1qZ2dNVFUzTlN3eE1EY3dJREUxTVRrc09UVTRRekUwTnpRc09EWTVJREUwTXpnc056ZzFJREUwTXpnc056Y3hRekUwTXpnc056UTFJREUwTlRVc056TXdJREUwT0RVc056TXdRekUxTURnc056TXdJREkwTnpRc01UWTVNeUF5TlRBNExERTNOVEJETWpVNU5Td3hPRGs0SURJMU9USXNNakV4T1NBeU5UQXdMREl5TmpORE1qUXpOU3d5TXpZMklESXpNVFFzTWpRMU15QXlNakF3TERJME56bERNakUwTml3eU5Ea3lJREl3TWpBc01qUTVNU0F4T1RZMkxESTBOemxhVFRFNU9Ua3NNakE1TkVNeU1EWXlMREl3TVRRZ01UazJNU3d4T0RNeUlERTROellzTVRnM01VTXhPREV4TERFNU1ERWdNVGd4Tnl3eU1ERTVJREU0T0Rjc01qQTVNME14T1RJekxESXhNekFnTVRrM01Td3lNVE13SURFNU9Ua3NNakE1TkZwTk1qSTRNeXd5TVRBeVF6SXpOVEVzTWpBeU55QXlNall5TERFNE5ETWdNakUzTVN3eE9EWTNRekl4TWpVc01UZzNPU0F5TVRBM0xERTVOVGtnTWpFek5pd3lNREk0UXpJeE56QXNNakV4TUNBeU1qUXpMREl4TkRjZ01qSTRNeXd5TVRBeVdpSWdabWxzYkQwaVkzVnljbVZ1ZEVOdmJHOXlJaUF2UGp3dlp6NDhMMmMrUEM5emRtYysiLCJhdHRyaWJ1dGVzIjogW3sgInRyYWl0X3R5cGUiOiAiTGF5ZXJCYWNrZ3JvdW5kIiwgInZhbHVlIjogImJhY2tncm91bmQiIH0seyAidHJhaXRfdHlwZSI6ICJMYXllckJvZHkiLCAidmFsdWUiOiAiZ2hvc3QiIH1dfQ=='
-var b = Buffer.from(str, 'base64')
-var s = b.toString()
-console.log('s...........')
-console.log(s)
-const nftIds = [0, 1, 2]
+
+import { Container, NFTCardContainer, NFTListContainer, SVGImage, TextWrapper, Wrapper } from './style'
+import { b64ToString, FETCH_NFTS_URI, stringToObjectURL } from '../../shared/helpers/util'
+import { composableAddress } from '../../blockchain/abi/ComposableNFT'
+import { BolderText, WalletText } from '../../shared/Typography'
+import { ComposableNFT } from '../../blockchain/instance'
+
 export const NFTDashboard: React.FC = withTheme((props: ThemeProps<any>) => {
+  const { account, active, library, chainId } = useWeb3React()
+  const { theme } = props
+  const [userNFTs, setUserNFTs] = useState<any>([])
+
+  useEffect(() => {
+    if (library) init()
+  }, [library])
+
+  const init = async () => {
+    try {
+      const url = `${FETCH_NFTS_URI}/${account}/nft?chain=0X${chainId}&format=decimal&token_addresses=${composableAddress}`
+      const { data } = await axios.get(url, {
+        headers: {
+          'X-API-Key': 'test',
+          accept: 'application/json',
+        },
+      })
+      const { result } = data
+      setUserNFTs(result)
+      // console.info("data", result)
+    } catch (error) {
+      console.error('error initializing', error)
+    }
+  }
+
   return (
     <Container>
-      <svg id="nft1" width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="LayerBackground" color="#fff">
-          <rect fill="currentColor" width="100%" height="100%"></rect>
-        </g>
-        <g id="LayerBody" color="#000">
-          <g transform="matrix(0.124509,1.5248e-17,1.5248e-17,-0.124509,-36.1688,329.874)">
-            <path
-              d="M1966,2479C1944,2474 1897,2455 1861,2438C1801,2409 1736,2347 1107,1721C396,1012 394,1010 432,972C439,965 452,960 463,960C473,960 592,1024 727,1101C943,1226 976,1242 999,1234C1059,1213 1049,1195 766,832C620,644 496,482 490,470C471,434 518,385 551,406C558,410 775,580 1034,785C1293,989 1514,1161 1525,1167C1551,1181 1586,1167 1595,1141C1599,1128 1575,1070 1519,958C1474,869 1438,785 1438,771C1438,745 1455,730 1485,730C1508,730 2474,1693 2508,1750C2595,1898 2592,2119 2500,2263C2435,2366 2314,2453 2200,2479C2146,2492 2020,2491 1966,2479ZM1999,2094C2062,2014 1961,1832 1876,1871C1811,1901 1817,2019 1887,2093C1923,2130 1971,2130 1999,2094ZM2283,2102C2351,2027 2262,1843 2171,1867C2125,1879 2107,1959 2136,2028C2170,2110 2243,2147 2283,2102Z"
-              fill="currentColor"
-            />
-          </g>
-        </g>
-      </svg>
-      <NFTListContainer>
-        {nftIds.map((nft, index) => {
-          return <UserNFT nftId={nft} key={index} />
-        })}
-      </NFTListContainer>
+      <div>
+        <Wrapper>
+          <TextWrapper>
+            <BolderText fontSizeM="20px" fColor={theme.white}>
+              Ghostballs in Your Wallet
+            </BolderText>
+            <span>{userNFTs?.length || 0}</span>
+          </TextWrapper>
+          <div>
+            <NFTListContainer>
+              {userNFTs.map((nft: any, index: number) => {
+                return <UserNFT theme={theme} nft={nft} key={index} />
+              })}
+            </NFTListContainer>
+          </div>
+        </Wrapper>
+      </div>
     </Container>
   )
 })
 
 const UserNFT = (props: any) => {
-  const { nftId } = props
+  const { nft, theme } = props
+  const { library } = useWeb3React()
+  const nftId = nft.token_id
+  let tokenImgJSON: any = undefined
+  const [nftImageSrc, setNftImageSrc] = useState<any>()
   const navigate = useNavigate()
   const handleClick = () => {
     navigate(`/nfts/${nftId}`)
   }
-  return <NFTCardContainer onClick={handleClick}>{nftId}</NFTCardContainer>
+  useEffect(() => {
+    if (library) init()
+  }, [library])
+
+  const init = async () => {
+    if (nft.metadata) {
+      const metadata = nft.metadata.replaceAll('\\', '')
+      const nftDetails = JSON.parse(metadata)
+      tokenImgJSON = b64ToString(nftDetails.image)
+    } else {
+      tokenImgJSON = await ComposableNFT.methods._generateSVG(nftId).call()
+    }
+    setNftImageSrc(stringToObjectURL(tokenImgJSON))
+  }
+  return (
+    <NFTCardContainer onClick={handleClick}>
+      <SVGImage width="100%" height="255px" src={nftImageSrc} />
+      <WalletText fontSizeM="20px" fWeight="700">
+        Ghostball #{nftId}
+      </WalletText>
+    </NFTCardContainer>
+  )
 }

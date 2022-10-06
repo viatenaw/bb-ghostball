@@ -172,7 +172,7 @@ export const Navbar = (props: any) => {
                     >
                       <BtnContainer>
                         <RoundSVGIcon
-                          marginLeft="5px"
+                          margin="1px 0 0 4px"
                           height="34px"
                           width="34px"
                           src={richardAvatar}

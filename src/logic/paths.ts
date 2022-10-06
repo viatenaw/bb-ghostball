@@ -12,4 +12,5 @@ export const rootPath: UrlPath<{}> = '/'
 export const homePath: UrlPath<{}> = '/home'
 export const nftsPath: UrlPath<{}> = '/nfts'
 export const nftPath: UrlPath<{}> = '/nfts/:id'
+export const editLayerPath: UrlPath<{}> = '/nfts/:id/:layer'
 export const userPath: UrlPath<UserUrlProps> = `${homePath}/user/:user`

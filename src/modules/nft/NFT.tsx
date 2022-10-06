@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ThemeProps, withTheme } from 'styled-components'
 import {
   Bottom,
@@ -6,7 +6,6 @@ import {
   Main,
   AtrributesArea,
   AvatarArea,
-  Top,
   AtrributesList,
   AttributeBox,
   AtrributesHead,
@@ -22,15 +21,16 @@ import { ComposableNFT } from '../../blockchain/instance'
 import { useWeb3React } from '@web3-react/core'
 import { WalletText, CardBodyText, BolderText } from '../../shared/Typography'
 
-import leftArrow from '../../assets/images/left-arrow.svg'
-import openInNew from '../../assets/images/open-in-new-icon.svg'
-import { useIsMobileScreen } from '../../shared/hooks/useIsMobileScreen'
+import { b64ToString, stringToObjectURL } from '../../shared/helpers/util'
+import { TopSection } from './components/TopSection'
+import { NFTAvatarSection } from './components/NFTAvatarSection'
 
 const Buffer = require('buffer/').Buffer
 
 export const NFT: React.FC = withTheme((props: ThemeProps<any>) => {
   const { theme } = props
-  const isMobile = useIsMobileScreen()
+  const navigate = useNavigate()
+
   const { id } = useParams<any>()
   const [nftSvg, setNftSvg] = useState<any>()
   const [nftAttributes, setNftAttributes] = useState<any>([])
@@ -40,65 +40,50 @@ export const NFT: React.FC = withTheme((props: ThemeProps<any>) => {
   }, [library])
   const init = async () => {
     try {
+      console.log('tokenImgJSON')
+
+      setNftAttributes([
+        { trait_type: 'LayerBackground', value: 'red' },
+        { trait_type: 'LayerBody', value: 'yellow' },
+      ])
       const tokenB64 = await ComposableNFT.methods.tokenURI(id).call()
+      const tokenDetails = JSON.parse(b64ToString(tokenB64))
+      const tokenImgJSON = b64ToString(tokenDetails.image)
+      console.log('tokenImgJSON', tokenB64)
 
-      const tokenStr = tokenB64.split(',')[1]
-      const tokenBuffer = Buffer.from(tokenStr, 'base64')
-      const tokenJSON = tokenBuffer.toString()
-      const tokenDetails = JSON.parse(tokenJSON)
-
-      const tokenImgB64 = tokenDetails.image
-      const tokenImgStr = tokenImgB64.split(',')[1]
-      const tokenImgBuffer = Buffer.from(tokenImgStr, 'base64')
-      const tokenImgJSON = tokenImgBuffer.toString()
-      console.log('tokenImgJSON', tokenImgJSON)
-
-      let blob = new Blob([tokenImgJSON], { type: 'image/svg+xml' })
-      let tokenUrl = URL.createObjectURL(blob)
-
-      const attributes = tokenDetails.attributes
-      setNftAttributes(attributes)
-      console.log('attributes', attributes)
-
-      setNftSvg(tokenUrl)
+      // setNftAttributes(tokenDetails.attributes)
+      setNftSvg(tokenImgJSON)
     } catch (error) {
       console.error('error---', error)
     }
   }
+
+  const editLayer = (layer: IEditLayerProps) => {
+    navigate(`/nfts/${id}/${layer.trait_type.replace('Layer', '')}`)
+  }
+  console.log('nftAttributes', nftAttributes)
+
   return (
     <Container>
       <Main>
-        <Top>
-          <Button btnType="borderButton">
-            <SVGIcon width="18px" height="15px" src={leftArrow} />
-            {!isMobile && 'Back'}
-          </Button>
-        </Top>
+        <TopSection />
         <Bottom>
-          <AvatarArea>
-            {<NFTAvatar src={nftSvg} />}
-            <ButtonsContainer>
-              <Button btnType="tileButton">Preview</Button>
-              <Button btnType="tileButton">
-                <SVGIcon width="16px" height="16px" src={openInNew} />
-                Opensea
-              </Button>
-            </ButtonsContainer>
-          </AvatarArea>
+          <NFTAvatarSection nftSvg={nftSvg} />
           <AtrributesArea>
             <AtrributesHead>
               <BolderText fontSizeM="26px" fColor={theme.white}>
-                Ghostball#{id}
+                Ghostball #{id}
               </BolderText>
               <GreenTile>{nftAttributes.length} Attributes</GreenTile>
             </AtrributesHead>
             <AtrributesList>
               {nftAttributes &&
                 nftAttributes.map((el: any, idx: any) => {
+                  console.log('el', el)
                   return (
-                    <AttributeBox key={idx}>
+                    <AttributeBox onClick={() => editLayer(el)} key={idx}>
                       <WalletText fontSizeM="18px" wSpace="nowrap" fWeight="700" fColor={theme.primary}>
-                        {el.trait_type}
+                        {el.trait_type.replace('Layer', '')}
                       </WalletText>
                       <CardBodyText wSpace="nowrap">{el.value}</CardBodyText>
                     </AttributeBox>
@@ -111,3 +96,7 @@ export const NFT: React.FC = withTheme((props: ThemeProps<any>) => {
     </Container>
   )
 })
+interface IEditLayerProps {
+  trait_type: string
+  value: string
+}

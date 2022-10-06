@@ -1,4 +1,4 @@
-export const composableAddress: any = '0xECb6c7bB0Ad1b78bBdB5Cc135DFcFB003b4E9ECd'
+export const composableAddress: any = '0x379137Cce37876703A4F3F52AbE0230c9FFe8690'
 export const composableABI: any = [
   {
     inputs: [
